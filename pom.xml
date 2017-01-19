@@ -12,9 +12,18 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <web.context.name>${project.artifactId}</web.context.name>
+    <!-- <web.src.dir>${project.basedir}/webapp</web.src.dir> -->
+
+    <!-- Jetty -->
+    <jetty.version>9.4.0.v20161208</jetty.version>
+    <jetty.port>8080</jetty.port>
+    <jetty.stopPort>9966</jetty.stopPort>
+    <jetty.config.path>${project.basedir}/config/jetty</jetty.config.path>
   </properties>
 
   <dependencies>
+    <!-- Web App -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -22,6 +31,7 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- Unit Test -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -46,8 +56,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.6.1</version>
           <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
+            <source>1.7</source>
+            <target>1.7</target>
           </configuration>
         </plugin>
 
@@ -114,10 +124,24 @@
     </pluginManagement>
 
     <plugins>
+      <!-- Jetty Server -->
       <plugin>
         <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
-        <version>9.4.0.v20161208</version>
+        <version>${jetty.version}</version>
+        <configuration>
+          <httpConnector>
+            <port>${jetty.port}</port>
+          </httpConnector>
+          <scanIntervalSeconds>10</scanIntervalSeconds>
+          <stopPort>${jetty.stopPort}</stopPort>
+          <stopKey>foo</stopKey>
+          <!-- <webAppSourceDirectory>${web.src.dir}</webAppSourceDirectory> -->
+          <webApp>
+            <contextPath>/${web.context.name}</contextPath>
+            <defaultsDescriptor>${jetty.config.path}/webdefault.xml</defaultsDescriptor>
+          </webApp>
+        </configuration>
       </plugin>
     </plugins>
   </build>
