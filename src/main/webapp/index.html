@@ -3,18 +3,26 @@
   <head>
     <meta charset="utf-8">
     <title>J2EE Web Application</title>
+
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="webjars/lodash/4.15.0/lodash.min.js" charset="utf-8"></script>
+    <script src="webjars/vue/2.1.3/vue.min.js" charset="utf-8"></script>
   </head>
   <body>
-    <header>
-      <h1>Hello World!</h1>
-    </header>
-    <main>
-      <article>
-        <p>Welcome!</p>
-      </article>
+    <main id="app" class="container-fliud">
+      <section class="panel panel-default">
+        <header class="panel-heading">
+          <h3 class="penel-title">{{ title }}</h3>
+        </header>
+        <article class="panel-body">
+          <p>{{ message }}</p>
+        </article>
+        <footer class="panel-footer">
+          <p>&copy; Roger Xu at {{ date | formatDate }}</p>
+        </footer>
+      </section>
     </main>
-    <footer>
-      <p>2017</p>
-    </footer>
+
+    <script src="js/app.js" charset="utf-8"></script>
   </body>
 </html>
